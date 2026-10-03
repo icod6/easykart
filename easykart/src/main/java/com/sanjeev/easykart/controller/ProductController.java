@@ -1,7 +1,9 @@
 package com.sanjeev.easykart.controller;
 
-import com.sanjeev.easykart.entity.Product;
+import com.sanjeev.easykart.dto.ProductRequest;
+import com.sanjeev.easykart.dto.ProductResponse;
 import com.sanjeev.easykart.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,23 +19,23 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody Product product) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(product));
+    public ResponseEntity<ProductResponse> create(@Valid @RequestBody ProductRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(request));
     }
 
     @GetMapping
-    public List<Product> getAll() {
+    public List<ProductResponse> getAll() {
         return productService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Product getById(@PathVariable Long id) {
+    public ProductResponse getById(@PathVariable Long id) {
         return productService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public Product update(@PathVariable Long id, @RequestBody Product product) {
-        return productService.update(id, product);
+    public ProductResponse update(@PathVariable Long id, @Valid @RequestBody ProductRequest request) {
+        return productService.update(id, request);
     }
 
     @DeleteMapping("/{id}")
