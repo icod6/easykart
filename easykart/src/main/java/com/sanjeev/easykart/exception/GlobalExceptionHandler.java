@@ -32,5 +32,10 @@ public class GlobalExceptionHandler {
         ErrorResponse body = new ErrorResponse(409, ex.getMessage(), LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
     }
-}
 
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidCredentials(InvalidCredentialsException ex) {
+        ErrorResponse body = new ErrorResponse(401, ex.getMessage(), LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body);
+    }
+}
