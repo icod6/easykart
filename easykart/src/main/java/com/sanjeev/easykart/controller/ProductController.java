@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -24,8 +26,11 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductResponse> getAll() {
-        return productService.getAll();
+    public Page<ProductResponse> getAll(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long categoryId,
+            Pageable pageable) {
+        return productService.getAll(name, categoryId, pageable);
     }
 
     @GetMapping("/{id}")

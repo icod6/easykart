@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.sanjeev.easykart.exception.ResourceNotFoundException;
 import com.sanjeev.easykart.entity.Category;
 import com.sanjeev.easykart.repository.CategoryRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -25,10 +27,10 @@ public class ProductService {
         return new ProductResponse(productRepository.save(product));
     }
 
-    public List<ProductResponse> getAll() {
-        return productRepository.findAll().stream()
-                .map(ProductResponse::new)
-                .toList();
+    public Page<ProductResponse> getAll(String name, Long categoryId, Pageable pageable) {
+        String nameFilter = (name == null || name.isBlank()) ? null : name;
+        return productRepository.search(nameFilter, categoryId, pageable)
+                .map(ProductResponse::new);
     }
 
     public ProductResponse getById(Long id) {
