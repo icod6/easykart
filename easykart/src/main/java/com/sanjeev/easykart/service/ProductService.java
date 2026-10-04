@@ -7,6 +7,8 @@ import com.sanjeev.easykart.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.sanjeev.easykart.exception.ResourceNotFoundException;
+import com.sanjeev.easykart.entity.Category;
+import com.sanjeev.easykart.repository.CategoryRepository;
 
 import java.util.List;
 
@@ -15,6 +17,7 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     public ProductResponse create(ProductRequest request) {
         Product product = new Product();
@@ -52,7 +55,10 @@ public class ProductService {
         product.setDescription(request.getDescription());
         product.setPrice(request.getPrice());
         product.setStock(request.getStock());
+
+        Category category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Category not found with id " + request.getCategoryId()));
+        product.setCategory(category);
     }
 }
-
-
