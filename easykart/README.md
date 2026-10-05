@@ -84,5 +84,6 @@ Starts the app (port 8080) and MySQL 8 (port 3307), connected automatically.
 
 ## What I learned
 forgetting to restart the app three times, the lazy-loading and null-category issue, and the Git token problem.
+Docker will override .env file and will use environment variable if EV is already set.
 
 ## Coming next
