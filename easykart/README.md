@@ -25,6 +25,35 @@ Java 17+, Spring Boot, Spring Data JPA, MySQL, Maven, JUnit 5, Mockito
 3. Set your DB username and password in `src/main/resources/application.properties`
 4. Run `mvn spring-boot:run`
 
+
+
+## Configuration
+This app needs two secrets: `DB_PASSWORD` and `JWT_SECRET`.
+
+**Option 1 (recommended): set them as OS environment variables.**
+On Windows (PowerShell), run once, then restart your terminal/IDE:
+​```
+setx DB_PASSWORD "your_password"
+setx JWT_SECRET "your_long_random_secret_32+_chars"
+​```
+
+**Option 2: use a `.env` file** (only used if the variables above aren't already set in your OS):
+​```
+DB_PASSWORD=your_password
+JWT_SECRET=your_long_random_secret
+​```
+Note: if you've previously run `setx`, those values take priority over `.env`, since OS environment variables always override `.env` in Docker Compose.
+
+## How to run with Docker
+​```
+docker compose up --build
+​```
+Starts the app (port 8080) and MySQL 8 (port 3307), connected automatically.
+
+
+
+
+
 ## API endpoints
 | Method | URL | Description |
 |---|---|---|
