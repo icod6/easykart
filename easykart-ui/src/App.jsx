@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Products from "./pages/Products";
+import Cart from "./pages/Cart";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function Home() {
   return <h1>EasyKart</h1>;
@@ -17,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
