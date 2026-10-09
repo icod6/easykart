@@ -7,6 +7,7 @@ import Cart from "./pages/Cart";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
+import AdminProducts from "./pages/admin/AdminProducts";
 
 function Home() {
   return <h1>EasyKart</h1>;
@@ -24,6 +25,7 @@ function App() {
         <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
         <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
         <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute adminOnly><AdminProducts /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

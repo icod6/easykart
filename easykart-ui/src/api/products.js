@@ -13,3 +13,30 @@ export function getProducts({ name = "", categoryId = "", page = 0, size = 10 } 
 export function getCategories() {
   return apiRequest("/api/categories");
 }
+
+export function createProduct(product) {
+  return apiRequest("/api/products", {
+    method: "POST",
+    body: JSON.stringify(product),
+  });
+}
+
+export function updateProduct(id, product) {
+  return apiRequest(`/api/products/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(product),
+  });
+}
+
+export function deleteProduct(id) {
+  return apiRequest(`/api/products/${id}`, {
+    method: "DELETE",
+  });
+}
+
+export function createCategory(name) {
+  return apiRequest("/api/categories", {
+    method: "POST",
+    body: JSON.stringify({ name }),
+  });
+}
