@@ -16,6 +16,7 @@ public class ProductResponse {
     private final Integer stock;
     private final LocalDateTime createdAt;
     private final String categoryName;
+    private final Long categoryId;
 
     public ProductResponse(Product product) {
         this.id = product.getId();
@@ -25,6 +26,7 @@ public class ProductResponse {
         this.stock = product.getStock();
         this.createdAt = product.getCreatedAt();
         this.categoryName = product.getCategory() != null ? product.getCategory().getName() : null;
+        this.categoryId = product.getCategory() != null ? product.getCategory().getId() : null;
     }
 }
 

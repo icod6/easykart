@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import { getProducts, getCategories } from "../api/products";
+// import { getProducts, getCategories } from "../api/products";
 import { addToCart } from "../api/cart";
 import { useAuth } from "../context/AuthContext";
+
+import { getProducts } from "../api/products";
+import { getCategories } from "../api/categories";
 
 function Products() {
   const [products, setProducts] = useState([]);
