@@ -10,3 +10,9 @@ export function createCategory(name) {
     body: JSON.stringify({ name }),
   });
 }
+
+export function deleteCategory(id) {
+  return apiRequest(`/api/categories/${id}`, {
+    method: "DELETE",
+  });
+}

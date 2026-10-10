@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 
-import { getProducts, createProduct, updateProduct } from "../../api/products";
-import { getCategories, createCategory } from "../../api/categories";
+import {createProduct, updateProduct } from "../../api/products";
+import { getCategories, createCategory, deleteCategory } from "../../api/categories";
 import { apiRequest } from "../../api/client";
 
 function ProductForm() {
@@ -75,6 +75,17 @@ function ProductForm() {
     }
   }
 
+  async function handleDeleteCategory(id) {
+  if (!confirm("Delete this category?")) return;
+  try {
+    await deleteCategory(id);
+    setCategories(categories.filter((c) => c.id !== id));
+    if (categoryId === String(id)) setCategoryId("");
+  } catch (err) {
+    setError(err.message);
+  }
+}
+
   return (
     <div style={{ padding: "1rem", maxWidth: "400px" }}>
       <h2>{isEdit ? "Edit Product" : "Add Product"}</h2>
@@ -139,6 +150,16 @@ function ProductForm() {
             + Add Category
           </button>
         </div>
+
+        <div style={{ marginTop: "1rem" }}>
+  <h4>Existing Categories</h4>
+  {categories.map((c) => (
+    <div key={c.id} style={{ display: "flex", justifyContent: "space-between", maxWidth: "250px" }}>
+      <span>{c.name}</span>
+      <button type="button" onClick={() => handleDeleteCategory(c.id)}>Delete</button>
+    </div>
+  ))}
+</div>
 
         {error && <p style={{ color: "red" }}>{error}</p>}
 
