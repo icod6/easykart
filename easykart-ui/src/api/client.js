@@ -1,4 +1,10 @@
-const BASE_URL = "http://localhost:8080";
+// const BASE_URL = "http://localhost:8080";
+
+// Vite
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
+// Create React App instead:
+// const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 export async function apiRequest(path, options = {}) {
   const token = localStorage.getItem("token");
