@@ -8,6 +8,8 @@ import com.sanjeev.easykart.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import com.sanjeev.easykart.exception.ResourceNotFoundException;
+
 import java.util.List;
 
 @Service
@@ -30,4 +32,11 @@ public class CategoryService {
                 .map(CategoryResponse::new)
                 .toList();
     }
+
+    public void delete(Long id) {
+    if (!categoryRepository.existsById(id)) {
+        throw new ResourceNotFoundException("Category not found with id " + id);
+    }
+    categoryRepository.deleteById(id);
+}
 }

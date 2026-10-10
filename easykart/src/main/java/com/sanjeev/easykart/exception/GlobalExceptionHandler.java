@@ -48,8 +48,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<ErrorResponse> handleDataIntegrity(DataIntegrityViolationException ex) {
-        ErrorResponse body = new ErrorResponse(409, "This product cannot be deleted because it has existing orders.", LocalDateTime.now());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
+public ResponseEntity<ErrorResponse> handleDataIntegrity(DataIntegrityViolationException ex) {
+    ErrorResponse body = new ErrorResponse(409, "This item cannot be deleted because it is referenced by other records.", LocalDateTime.now());
+    return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
 }
 }
